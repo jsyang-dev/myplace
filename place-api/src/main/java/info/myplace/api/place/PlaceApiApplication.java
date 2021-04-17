@@ -1,13 +1,13 @@
-package info.myplace;
+package info.myplace.api.place;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class MyplaceApplication {
+public class PlaceApiApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(MyplaceApplication.class, args);
+        SpringApplication.run(PlaceApiApplication.class, args);
     }
 
 }
