@@ -1,4 +1,4 @@
-package info.myplace.api.place;
+package info.myplace.placeapi;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
