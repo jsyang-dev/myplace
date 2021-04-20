@@ -43,8 +43,9 @@ public class DatabaseCleanup implements InitializingBean {
 
     private String toSnakeCase(String str) {
         StringBuilder result = new StringBuilder();
+        result.append(Character.toLowerCase(str.charAt(0)));
 
-        for (int i = 0; i < str.length(); i++) {
+        for (int i = 1; i < str.length(); i++) {
             char ch = str.charAt(i);
             if (Character.isUpperCase(ch)) {
                 result.append('_');
