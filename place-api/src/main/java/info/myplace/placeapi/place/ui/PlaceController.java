@@ -21,6 +21,6 @@ public class PlaceController {
     @PostMapping
     public ResponseEntity<PlaceResponse> createPlace(PlaceRequest placeRequest) {
         PlaceResponse placeResponse = placeService.createPlace(placeRequest);
-        return ResponseEntity.created(URI.create("/places/" + placeResponse.getId())).build();
+        return ResponseEntity.created(URI.create("/places/" + placeResponse.getId())).body(placeResponse);
     }
 }

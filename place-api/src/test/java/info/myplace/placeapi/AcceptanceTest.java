@@ -2,6 +2,7 @@ package info.myplace.placeapi;
 
 import info.myplace.placeapi.util.DatabaseCleanup;
 import io.restassured.RestAssured;
+import io.restassured.specification.RequestSpecification;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -22,5 +23,9 @@ public abstract class AcceptanceTest {
     public void setUp() {
         RestAssured.port = port;
         databaseCleanup.execute();
+    }
+
+    protected RequestSpecification given() {
+        return RestAssured.given().log().all();
     }
 }

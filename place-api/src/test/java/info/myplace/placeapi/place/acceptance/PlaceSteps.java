@@ -1,9 +1,9 @@
 package info.myplace.placeapi.place.acceptance;
 
 import info.myplace.placeapi.place.dto.PlaceRequest;
-import io.restassured.RestAssured;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
 import org.springframework.data.geo.Point;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -21,9 +21,8 @@ public class PlaceSteps {
             .description("경기도 안양시와 군포시 경계에 있는 산림욕장")
             .build();
 
-    public static ExtractableResponse<Response> 장소_생성_요청(PlaceRequest placeRequest) {
-        return RestAssured
-                .given().log().all()
+    public static ExtractableResponse<Response> 장소_생성_요청(RequestSpecification given, PlaceRequest placeRequest) {
+        return given
                 .body(placeRequest)
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .accept(MediaType.APPLICATION_JSON_VALUE)

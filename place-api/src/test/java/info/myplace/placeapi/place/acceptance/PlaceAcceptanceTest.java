@@ -17,7 +17,7 @@ class PlaceAcceptanceTest extends AcceptanceTest {
     @DisplayName("장소를 생성한다")
     void createPlace() {
         // when
-        ExtractableResponse<Response> response = 장소_생성_요청(수리산_산림욕장);
+        ExtractableResponse<Response> response = 장소_생성_요청(given(), 수리산_산림욕장);
 
         // then
         장소_생성됨(response);
