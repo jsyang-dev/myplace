@@ -52,7 +52,7 @@ class PlaceDocumentation extends Documentation {
 
         // when
         장소_생성_요청(
-                given("place-create", null, requestFields, responseFields),
+                given("place/create", null, requestFields, responseFields),
                 수리산_산림욕장
         );
     }
