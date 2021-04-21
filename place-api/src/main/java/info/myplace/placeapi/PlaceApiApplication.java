@@ -1,4 +1,4 @@
-package info.myplace.api.place;
+package info.myplace.placeapi;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

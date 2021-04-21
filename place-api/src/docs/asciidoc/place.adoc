@@ -1,0 +1,24 @@
+[[place]]
+== 장소(Place)
+
+=== 장소 생성
+
+==== HTTP Request
+
+include::{snippets}/place/create/http-request.adoc[]
+
+==== HTTP Response
+
+include::{snippets}/place/create/http-response.adoc[]
+
+==== CURL Request
+
+include::{snippets}/place/create/curl-request.adoc[]
+
+==== Request Fields
+
+include::{snippets}/place/create/request-fields.adoc[]
+
+==== Response Fields
+
+include::{snippets}/place/create/response-fields.adoc[]
