@@ -87,8 +87,8 @@
 
 - 장소 관리 기능
   - 장소 생성
-  - 장소 리스트 조회
   - 장소 조회
+  - 장소 리스트 조회
   - 장소 수정
   - 장소 삭제
 - Issue: <https://github.com/jsyang-dev/myplace/issues/4>
