@@ -23,6 +23,7 @@ import static org.springframework.restdocs.operation.preprocess.Preprocessors.pr
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.prettyPrint;
 import static org.springframework.restdocs.payload.PayloadDocumentation.requestFields;
 import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
+import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
 import static org.springframework.restdocs.request.RequestDocumentation.requestParameters;
 import static org.springframework.restdocs.restassured3.RestAssuredRestDocumentation.document;
 import static org.springframework.restdocs.restassured3.RestAssuredRestDocumentation.documentationConfiguration;
@@ -51,6 +52,7 @@ public abstract class Documentation {
     }
 
     protected RequestSpecification given(String identifier,
+                                         ParameterDescriptor[] pathParameters,
                                          ParameterDescriptor[] requestParameters,
                                          FieldDescriptor[] requestFields,
                                          FieldDescriptor[] responseFields) {
@@ -59,6 +61,7 @@ public abstract class Documentation {
                 .filter(document(identifier,
                         preprocessRequest(prettyPrint(), modifyUris().port(8081)),
                         preprocessResponse(prettyPrint()),
+                        pathParameters(Optional.ofNullable(pathParameters).orElse(new ParameterDescriptor[]{})),
                         requestParameters(Optional.ofNullable(requestParameters).orElse(new ParameterDescriptor[]{})),
                         requestFields(Optional.ofNullable(requestFields).orElse(new FieldDescriptor[]{})),
                         responseFields(Optional.ofNullable(responseFields).orElse(new FieldDescriptor[]{}))

@@ -1,6 +1,7 @@
 package info.myplace.placeapi.place.acceptance;
 
 import info.myplace.placeapi.AcceptanceTest;
+import info.myplace.placeapi.place.dto.PlaceResponse;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
@@ -29,10 +30,10 @@ class PlaceAcceptanceTest extends AcceptanceTest {
     @DisplayName("장소를 조회한다")
     void getPlace() {
         // given
-        ExtractableResponse<Response> createResponse = 장소_생성_요청(given(), 수리산_산림욕장);
+        PlaceResponse placeResponse = 장소_생성_요청(given(), 수리산_산림욕장).as(PlaceResponse.class);
 
         // when
-        ExtractableResponse<Response> response = 장소_조회_요청(given(), createResponse);
+        ExtractableResponse<Response> response = 장소_조회_요청(given(), placeResponse);
 
         // then
         장소_조회됨(response);

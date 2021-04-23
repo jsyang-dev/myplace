@@ -17,4 +17,8 @@ public class PlaceService {
         Place place = placeRepository.save(placeRequest.toPlace());
         return PlaceResponse.of(place);
     }
+
+    public PlaceResponse getPlace(Long id) {
+        return PlaceResponse.builder().build();
+    }
 }

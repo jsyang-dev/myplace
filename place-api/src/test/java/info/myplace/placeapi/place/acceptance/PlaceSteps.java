@@ -33,13 +33,11 @@ public class PlaceSteps {
                 .extract();
     }
 
-    public static ExtractableResponse<Response> 장소_조회_요청(RequestSpecification given, ExtractableResponse<Response> createResponse) {
-        String uri = createResponse.header("Location");
-
+    public static ExtractableResponse<Response> 장소_조회_요청(RequestSpecification given, PlaceResponse placeResponse) {
         return given
                 .accept(MediaType.APPLICATION_JSON_VALUE)
                 .when()
-                .get(uri)
+                .get(URI_PLACES + "/{id}", placeResponse.getId())
                 .then().log().all()
                 .extract();
     }
