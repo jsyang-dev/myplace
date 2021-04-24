@@ -4,6 +4,7 @@ import info.myplace.placeapi.place.domain.Place;
 import info.myplace.placeapi.place.domain.PlaceRepository;
 import info.myplace.placeapi.place.dto.PlaceRequest;
 import info.myplace.placeapi.place.dto.PlaceResponse;
+import info.myplace.placeapi.place.exception.PlaceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +20,7 @@ public class PlaceService {
     }
 
     public PlaceResponse getPlace(Long id) {
-        return PlaceResponse.builder().build();
+        Place place = placeRepository.findById(id).orElseThrow(() -> new PlaceNotFoundException(id));
+        return PlaceResponse.of(place);
     }
 }
