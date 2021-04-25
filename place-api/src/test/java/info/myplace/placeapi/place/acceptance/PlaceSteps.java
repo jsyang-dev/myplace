@@ -1,6 +1,7 @@
 package info.myplace.placeapi.place.acceptance;
 
 import info.myplace.placeapi.place.dto.PlaceRequest;
+import info.myplace.placeapi.place.dto.PlaceResponse;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
@@ -32,8 +33,22 @@ public class PlaceSteps {
                 .extract();
     }
 
+    public static ExtractableResponse<Response> 장소_조회_요청(RequestSpecification given, PlaceResponse placeResponse) {
+        return given
+                .accept(MediaType.APPLICATION_JSON_VALUE)
+                .when()
+                .get(URI_PLACES + "/{id}", placeResponse.getId())
+                .then().log().all()
+                .extract();
+    }
+
     public static void 장소_생성됨(ExtractableResponse<Response> response) {
         assertThat(response.statusCode()).isEqualTo(HttpStatus.CREATED.value());
         assertThat(response.header("Location")).isNotBlank();
+    }
+
+    public static void 장소_조회됨(ExtractableResponse<Response> response) {
+        assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value());
+        assertThat(response.as(PlaceResponse.class)).isNotNull();
     }
 }

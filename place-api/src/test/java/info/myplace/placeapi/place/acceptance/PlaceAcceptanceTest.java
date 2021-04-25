@@ -1,6 +1,7 @@
 package info.myplace.placeapi.place.acceptance;
 
 import info.myplace.placeapi.AcceptanceTest;
+import info.myplace.placeapi.place.dto.PlaceResponse;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
@@ -9,6 +10,8 @@ import org.junit.jupiter.api.Test;
 import static info.myplace.placeapi.place.acceptance.PlaceSteps.수리산_산림욕장;
 import static info.myplace.placeapi.place.acceptance.PlaceSteps.장소_생성_요청;
 import static info.myplace.placeapi.place.acceptance.PlaceSteps.장소_생성됨;
+import static info.myplace.placeapi.place.acceptance.PlaceSteps.장소_조회_요청;
+import static info.myplace.placeapi.place.acceptance.PlaceSteps.장소_조회됨;
 
 @DisplayName("장소 관리 인수 테스트")
 class PlaceAcceptanceTest extends AcceptanceTest {
@@ -21,5 +24,18 @@ class PlaceAcceptanceTest extends AcceptanceTest {
 
         // then
         장소_생성됨(response);
+    }
+
+    @Test
+    @DisplayName("장소를 조회한다")
+    void getPlace() {
+        // given
+        PlaceResponse placeResponse = 장소_생성_요청(given(), 수리산_산림욕장).as(PlaceResponse.class);
+
+        // when
+        ExtractableResponse<Response> response = 장소_조회_요청(given(), placeResponse);
+
+        // then
+        장소_조회됨(response);
     }
 }
