@@ -40,7 +40,7 @@ class PlaceServiceTest extends ServiceTest {
     }
 
     @Test
-    @DisplayName("장소를 생성한다")
+    @DisplayName("장소를 조회한다")
     void getPlace() {
         // given
         PlaceResponse createdPlaceResponse = placeService.createPlace(placeRequest);

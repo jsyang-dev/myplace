@@ -22,3 +22,26 @@ include::{snippets}/place/create/request-fields.adoc[]
 ==== Response Fields
 
 include::{snippets}/place/create/response-fields.adoc[]
+
+
+=== 장소 조회
+
+==== HTTP Request
+
+include::{snippets}/place/get/http-request.adoc[]
+
+==== HTTP Response
+
+include::{snippets}/place/get/http-response.adoc[]
+
+==== CURL Request
+
+include::{snippets}/place/get/curl-request.adoc[]
+
+==== Path Parameter
+
+include::{snippets}/place/get/path-parameters.adoc[]
+
+==== Response Fields
+
+include::{snippets}/place/get/response-fields.adoc[]
