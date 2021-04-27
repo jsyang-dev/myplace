@@ -7,11 +7,17 @@ import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 import static info.myplace.placeapi.place.acceptance.PlaceSteps.수리산_산림욕장;
+import static info.myplace.placeapi.place.acceptance.PlaceSteps.장소_리스트_조회_요청;
+import static info.myplace.placeapi.place.acceptance.PlaceSteps.장소_리스트_조회됨;
+import static info.myplace.placeapi.place.acceptance.PlaceSteps.장소_리스트_포함됨;
 import static info.myplace.placeapi.place.acceptance.PlaceSteps.장소_생성_요청;
 import static info.myplace.placeapi.place.acceptance.PlaceSteps.장소_생성됨;
 import static info.myplace.placeapi.place.acceptance.PlaceSteps.장소_조회_요청;
 import static info.myplace.placeapi.place.acceptance.PlaceSteps.장소_조회됨;
+import static info.myplace.placeapi.place.acceptance.PlaceSteps.초막골_생태공원;
 
 @DisplayName("장소 관리 인수 테스트")
 class PlaceAcceptanceTest extends AcceptanceTest {
@@ -37,5 +43,20 @@ class PlaceAcceptanceTest extends AcceptanceTest {
 
         // then
         장소_조회됨(response);
+    }
+
+    @Test
+    @DisplayName("장소 리스트를 조회한다")
+    void getPlaces() {
+        // given
+        PlaceResponse placeResponse1 = 장소_생성_요청(given(), 수리산_산림욕장).as(PlaceResponse.class);
+        PlaceResponse placeResponse2 = 장소_생성_요청(given(), 초막골_생태공원).as(PlaceResponse.class);
+
+        // when
+        ExtractableResponse<Response> response = 장소_리스트_조회_요청(given());
+
+        // then
+        장소_리스트_조회됨(response);
+        장소_리스트_포함됨(response, Arrays.asList(placeResponse1, placeResponse2));
     }
 }
