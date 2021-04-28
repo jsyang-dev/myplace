@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping("/places")
@@ -30,5 +31,11 @@ public class PlaceController {
     public ResponseEntity<PlaceResponse> getPlace(@PathVariable Long id) {
         PlaceResponse placeResponse = placeService.getPlace(id);
         return ResponseEntity.ok(placeResponse);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<PlaceResponse>> getPlaces() {
+        List<PlaceResponse> places = placeService.getPlaces();
+        return ResponseEntity.ok(places);
     }
 }
