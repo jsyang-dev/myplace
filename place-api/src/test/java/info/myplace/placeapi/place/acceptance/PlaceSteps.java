@@ -11,6 +11,7 @@ import org.springframework.http.MediaType;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -75,8 +76,15 @@ public class PlaceSteps {
         assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value());
     }
 
-    public static void 장소_리스트_포함됨(ExtractableResponse<Response> response, List<PlaceResponse> expectedPlaceResponses) {
-        List<PlaceResponse> placeResponses = new ArrayList<>(response.jsonPath().getList(".", PlaceResponse.class));
-        assertThat(placeResponses).containsAll(expectedPlaceResponses);
+    public static void 장소_리스트_포함됨(ExtractableResponse<Response> response, List<PlaceResponse> placeResponses) {
+        List<Long> placeIds = new ArrayList<>(response.jsonPath().getList(".", PlaceResponse.class))
+                .stream()
+                .map(PlaceResponse::getId)
+                .collect(Collectors.toList());
+        List<Long> expectedPlaceIds = placeResponses.stream()
+                .map(PlaceResponse::getId)
+                .collect(Collectors.toList());
+
+        assertThat(placeIds).containsAll(expectedPlaceIds);
     }
 }
