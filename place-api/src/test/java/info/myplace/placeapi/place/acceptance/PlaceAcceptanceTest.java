@@ -15,6 +15,8 @@ import static info.myplace.placeapi.place.acceptance.PlaceSteps.장소_리스트
 import static info.myplace.placeapi.place.acceptance.PlaceSteps.장소_리스트_포함됨;
 import static info.myplace.placeapi.place.acceptance.PlaceSteps.장소_생성_요청;
 import static info.myplace.placeapi.place.acceptance.PlaceSteps.장소_생성됨;
+import static info.myplace.placeapi.place.acceptance.PlaceSteps.장소_수정_요청;
+import static info.myplace.placeapi.place.acceptance.PlaceSteps.장소_수정됨;
 import static info.myplace.placeapi.place.acceptance.PlaceSteps.장소_조회_요청;
 import static info.myplace.placeapi.place.acceptance.PlaceSteps.장소_조회됨;
 import static info.myplace.placeapi.place.acceptance.PlaceSteps.초막골_생태공원;
@@ -58,5 +60,18 @@ class PlaceAcceptanceTest extends AcceptanceTest {
         // then
         장소_리스트_조회됨(response);
         장소_리스트_포함됨(response, Arrays.asList(placeResponse1, placeResponse2));
+    }
+
+    @Test
+    @DisplayName("장소를 수정한다")
+    void updatePlace() {
+        // given
+        PlaceResponse placeResponse = 장소_생성_요청(given(), 수리산_산림욕장).as(PlaceResponse.class);
+
+        // when
+        ExtractableResponse<Response> response = 장소_수정_요청(given(), placeResponse, 초막골_생태공원);
+
+        // then
+        장소_수정됨(response);
     }
 }
