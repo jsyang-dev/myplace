@@ -14,6 +14,7 @@ import java.util.Arrays;
 import static info.myplace.placeapi.place.acceptance.PlaceSteps.수리산_산림욕장;
 import static info.myplace.placeapi.place.acceptance.PlaceSteps.장소_리스트_조회_요청;
 import static info.myplace.placeapi.place.acceptance.PlaceSteps.장소_생성_요청;
+import static info.myplace.placeapi.place.acceptance.PlaceSteps.장소_수정_요청;
 import static info.myplace.placeapi.place.acceptance.PlaceSteps.장소_조회_요청;
 import static info.myplace.placeapi.place.acceptance.PlaceSteps.초막골_생태공원;
 import static org.mockito.ArgumentMatchers.any;
@@ -127,5 +128,49 @@ class PlaceDocumentation extends Documentation {
 
         // when
         장소_리스트_조회_요청(given("place/getList", responseFields(responseFieldDescriptors)));
+    }
+
+    @Test
+    @DisplayName("장소를 수정한다")
+    void updatePlace() {
+        // given
+        PlaceResponse placeResponse2 = PlaceResponse.builder()
+                .id(1L)
+                .name(초막골_생태공원.getName())
+                .point(초막골_생태공원.getPoint())
+                .imageUrl(초막골_생태공원.getImageUrl())
+                .recommendCount(0)
+                .readCount(0)
+                .description(초막골_생태공원.getDescription())
+                .build();
+        when(placeService.updatePlace(anyLong(), any())).thenReturn(placeResponse2);
+
+        ParameterDescriptor[] pathParameterDescriptors = {
+                parameterWithName("id").description("장소 ID")
+        };
+        FieldDescriptor[] requestFieldDescriptors = {
+                fieldWithPath("name").description("장소명"),
+                fieldWithPath("point.x").description("위도"),
+                fieldWithPath("point.y").description("경도"),
+                fieldWithPath("imageUrl").description("이미지 경로"),
+                fieldWithPath("description").description("장소 설명")
+        };
+        FieldDescriptor[] responseFieldDescriptors = {
+                fieldWithPath("id").description("장소 ID"),
+                fieldWithPath("name").description("장소명"),
+                fieldWithPath("point.x").description("위도"),
+                fieldWithPath("point.y").description("경도"),
+                fieldWithPath("recommendCount").description("추천수"),
+                fieldWithPath("readCount").description("조회수"),
+                fieldWithPath("imageUrl").description("이미지 경로"),
+                fieldWithPath("description").description("장소 설명")
+        };
+
+        // when
+        장소_수정_요청(
+                given("place/update", pathParameters(pathParameterDescriptors), requestFields(requestFieldDescriptors), responseFields(responseFieldDescriptors)),
+                placeResponse1,
+                초막골_생태공원
+        );
     }
 }
