@@ -9,17 +9,17 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
-import static info.myplace.placeapi.place.acceptance.PlaceSteps.수리산_산림욕장;
-import static info.myplace.placeapi.place.acceptance.PlaceSteps.장소_리스트_조회_요청;
-import static info.myplace.placeapi.place.acceptance.PlaceSteps.장소_리스트_조회됨;
-import static info.myplace.placeapi.place.acceptance.PlaceSteps.장소_리스트_포함됨;
-import static info.myplace.placeapi.place.acceptance.PlaceSteps.장소_생성_요청;
-import static info.myplace.placeapi.place.acceptance.PlaceSteps.장소_생성됨;
-import static info.myplace.placeapi.place.acceptance.PlaceSteps.장소_수정_요청;
-import static info.myplace.placeapi.place.acceptance.PlaceSteps.장소_수정됨;
-import static info.myplace.placeapi.place.acceptance.PlaceSteps.장소_조회_요청;
-import static info.myplace.placeapi.place.acceptance.PlaceSteps.장소_조회됨;
-import static info.myplace.placeapi.place.acceptance.PlaceSteps.초막골_생태공원;
+import static info.myplace.placeapi.place.PlaceSteps.수리산_산림욕장;
+import static info.myplace.placeapi.place.PlaceSteps.장소_리스트_조회_요청;
+import static info.myplace.placeapi.place.PlaceSteps.장소_리스트_조회됨;
+import static info.myplace.placeapi.place.PlaceSteps.장소_리스트_포함됨;
+import static info.myplace.placeapi.place.PlaceSteps.장소_생성_요청;
+import static info.myplace.placeapi.place.PlaceSteps.장소_생성됨;
+import static info.myplace.placeapi.place.PlaceSteps.장소_수정_요청;
+import static info.myplace.placeapi.place.PlaceSteps.장소_수정됨;
+import static info.myplace.placeapi.place.PlaceSteps.장소_조회_요청;
+import static info.myplace.placeapi.place.PlaceSteps.장소_조회됨;
+import static info.myplace.placeapi.place.PlaceSteps.초막골_생태공원;
 
 @DisplayName("장소 관리 인수 테스트")
 class PlaceAcceptanceTest extends AcceptanceTest {

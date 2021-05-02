@@ -1,4 +1,4 @@
-package info.myplace.placeapi.place.acceptance;
+package info.myplace.placeapi.place;
 
 import info.myplace.placeapi.place.dto.PlaceRequest;
 import info.myplace.placeapi.place.dto.PlaceResponse;
