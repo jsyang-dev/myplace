@@ -85,4 +85,23 @@ class PlaceServiceTest extends ServiceTest {
                 .collect(Collectors.toList());
         assertThat(placeIds).containsAll(Arrays.asList(createdPlaceResponse1.getId(), createdPlaceResponse2.getId()));
     }
+
+    @Test
+    @DisplayName("장소를 수정한다")
+    void updatePlace() {
+        // given
+        PlaceResponse createdPlaceResponse = placeService.createPlace(placeRequest1);
+
+        // when
+        PlaceResponse placeResponse = placeService.updatePlace(createdPlaceResponse.getId(), placeRequest2);
+
+        // then
+        assertThat(placeResponse.getId()).isEqualTo(createdPlaceResponse.getId());
+        assertThat(placeResponse.getName()).isEqualTo(placeRequest2.getName());
+        assertThat(placeResponse.getPoint()).isEqualTo(placeRequest2.getPoint());
+        assertThat(placeResponse.getImageUrl()).isEqualTo(placeRequest2.getImageUrl());
+        assertThat(placeResponse.getRecommendCount()).isZero();
+        assertThat(placeResponse.getReadCount()).isZero();
+        assertThat(placeResponse.getDescription()).isEqualTo(placeRequest2.getDescription());
+    }
 }

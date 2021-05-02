@@ -33,4 +33,10 @@ public class PlaceService {
                 .map(PlaceResponse::of)
                 .collect(Collectors.toList());
     }
+
+    public PlaceResponse updatePlace(Long id, PlaceRequest placeRequest) {
+        Place place = placeRepository.findById(id).orElseThrow(() -> new PlaceNotFoundException(id));
+        place.update(placeRequest.toPlace());
+        return PlaceResponse.of(place);
+    }
 }
