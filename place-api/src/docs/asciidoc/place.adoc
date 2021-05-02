@@ -64,3 +64,30 @@ include::{snippets}/place/getList/curl-request.adoc[]
 ==== Response Fields
 
 include::{snippets}/place/getList/response-fields.adoc[]
+
+
+=== 장소 수정
+
+==== HTTP Request
+
+include::{snippets}/place/update/http-request.adoc[]
+
+==== HTTP Response
+
+include::{snippets}/place/update/http-response.adoc[]
+
+==== CURL Request
+
+include::{snippets}/place/update/curl-request.adoc[]
+
+==== Path Parameter
+
+include::{snippets}/place/update/path-parameters.adoc[]
+
+==== Request Fields
+
+include::{snippets}/place/update/request-fields.adoc[]
+
+==== Response Fields
+
+include::{snippets}/place/update/response-fields.adoc[]

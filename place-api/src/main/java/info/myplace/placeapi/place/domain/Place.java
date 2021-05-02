@@ -52,4 +52,11 @@ public class Place extends BaseEntity {
         this.imageUrl = imageUrl;
         this.description = description;
     }
+
+    public void update(Place place) {
+        this.name = place.getName();
+        this.point = place.getPoint();
+        this.imageUrl = place.getImageUrl();
+        this.description = place.getDescription();
+    }
 }
