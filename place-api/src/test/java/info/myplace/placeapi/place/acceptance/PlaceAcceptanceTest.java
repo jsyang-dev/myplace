@@ -13,6 +13,8 @@ import static info.myplace.placeapi.place.PlaceSteps.수리산_산림욕장;
 import static info.myplace.placeapi.place.PlaceSteps.장소_리스트_조회_요청;
 import static info.myplace.placeapi.place.PlaceSteps.장소_리스트_조회됨;
 import static info.myplace.placeapi.place.PlaceSteps.장소_리스트_포함됨;
+import static info.myplace.placeapi.place.PlaceSteps.장소_삭제_요청;
+import static info.myplace.placeapi.place.PlaceSteps.장소_삭제됨;
 import static info.myplace.placeapi.place.PlaceSteps.장소_생성_요청;
 import static info.myplace.placeapi.place.PlaceSteps.장소_생성됨;
 import static info.myplace.placeapi.place.PlaceSteps.장소_수정_요청;
@@ -73,5 +75,18 @@ class PlaceAcceptanceTest extends AcceptanceTest {
 
         // then
         장소_수정됨(response);
+    }
+
+    @Test
+    @DisplayName("장소를 삭제한다")
+    void deletePlace() {
+        // given
+        PlaceResponse placeResponse = 장소_생성_요청(given(), 수리산_산림욕장).as(PlaceResponse.class);
+
+        // when
+        ExtractableResponse<Response> response = 장소_삭제_요청(given(), placeResponse);
+
+        // then
+        장소_삭제됨(response);
     }
 }

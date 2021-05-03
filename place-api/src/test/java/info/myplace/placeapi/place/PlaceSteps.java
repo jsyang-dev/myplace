@@ -73,6 +73,14 @@ public class PlaceSteps {
                 .extract();
     }
 
+    public static ExtractableResponse<Response> 장소_삭제_요청(RequestSpecification given, PlaceResponse placeResponse) {
+        return given
+                .when()
+                .delete(URI_PLACES + "/{id}", placeResponse.getId())
+                .then().log().all()
+                .extract();
+    }
+
     public static void 장소_생성됨(ExtractableResponse<Response> response) {
         assertThat(response.statusCode()).isEqualTo(HttpStatus.CREATED.value());
         assertThat(response.header("Location")).isNotBlank();
@@ -101,5 +109,9 @@ public class PlaceSteps {
 
     public static void 장소_수정됨(ExtractableResponse<Response> response) {
         assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value());
+    }
+
+    public static void 장소_삭제됨(ExtractableResponse<Response> response) {
+        assertThat(response.statusCode()).isEqualTo(HttpStatus.NO_CONTENT.value());
     }
 }
