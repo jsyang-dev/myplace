@@ -91,3 +91,22 @@ include::{snippets}/place/update/request-fields.adoc[]
 ==== Response Fields
 
 include::{snippets}/place/update/response-fields.adoc[]
+
+
+=== 장소 삭제
+
+==== HTTP Request
+
+include::{snippets}/place/delete/http-request.adoc[]
+
+==== HTTP Response
+
+include::{snippets}/place/delete/http-response.adoc[]
+
+==== CURL Request
+
+include::{snippets}/place/delete/curl-request.adoc[]
+
+==== Path Parameter
+
+include::{snippets}/place/delete/path-parameters.adoc[]

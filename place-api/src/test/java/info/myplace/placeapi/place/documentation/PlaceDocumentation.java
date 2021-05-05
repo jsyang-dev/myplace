@@ -14,6 +14,7 @@ import java.util.Arrays;
 
 import static info.myplace.placeapi.place.PlaceSteps.수리산_산림욕장;
 import static info.myplace.placeapi.place.PlaceSteps.장소_리스트_조회_요청;
+import static info.myplace.placeapi.place.PlaceSteps.장소_삭제_요청;
 import static info.myplace.placeapi.place.PlaceSteps.장소_생성_요청;
 import static info.myplace.placeapi.place.PlaceSteps.장소_수정_요청;
 import static info.myplace.placeapi.place.PlaceSteps.장소_조회_요청;
@@ -164,6 +165,21 @@ class PlaceDocumentation extends Documentation {
                 given("place/update", pathParameters(pathParameterDescriptors), requestFields(requestFieldDescriptors), responseFields(responseFieldDescriptors)),
                 수리산_산림욕장_응답,
                 초막골_생태공원
+        );
+    }
+
+    @Test
+    @DisplayName("장소를 삭제한다")
+    void deletePlace() {
+        // given
+        ParameterDescriptor[] pathParameterDescriptors = {
+                parameterWithName("id").description("장소 ID")
+        };
+
+        // when
+        장소_삭제_요청(
+                given("place/delete", pathParameters(pathParameterDescriptors)),
+                수리산_산림욕장_응답
         );
     }
 }
