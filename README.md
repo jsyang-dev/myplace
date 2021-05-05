@@ -81,14 +81,15 @@
 
 - 장소의 카테고리 정보
 
-## 단계별 요구사항
+## 요구사항
 
 ### 장소 관리
 
-- 장소 관리 기능 구현
+- 장소 관리 기능
   - 장소 생성
-  - 장소 리스트 조회
   - 장소 조회
+  - 장소 리스트 조회
   - 장소 수정
   - 장소 삭제
-    
+- Issue: <https://github.com/jsyang-dev/myplace/issues/4>
+- Branch: <https://github.com/jsyang-dev/myplace/tree/feature/4>

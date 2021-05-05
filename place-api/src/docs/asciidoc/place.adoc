@@ -1,0 +1,112 @@
+[[place]]
+== 장소(Place)
+
+=== 장소 생성
+
+==== HTTP Request
+
+include::{snippets}/place/create/http-request.adoc[]
+
+==== HTTP Response
+
+include::{snippets}/place/create/http-response.adoc[]
+
+==== CURL Request
+
+include::{snippets}/place/create/curl-request.adoc[]
+
+==== Request Fields
+
+include::{snippets}/place/create/request-fields.adoc[]
+
+==== Response Fields
+
+include::{snippets}/place/create/response-fields.adoc[]
+
+
+=== 장소 조회
+
+==== HTTP Request
+
+include::{snippets}/place/get/http-request.adoc[]
+
+==== HTTP Response
+
+include::{snippets}/place/get/http-response.adoc[]
+
+==== CURL Request
+
+include::{snippets}/place/get/curl-request.adoc[]
+
+==== Path Parameter
+
+include::{snippets}/place/get/path-parameters.adoc[]
+
+==== Response Fields
+
+include::{snippets}/place/get/response-fields.adoc[]
+
+
+=== 장소 리스트 조회
+
+==== HTTP Request
+
+include::{snippets}/place/getList/http-request.adoc[]
+
+==== HTTP Response
+
+include::{snippets}/place/getList/http-response.adoc[]
+
+==== CURL Request
+
+include::{snippets}/place/getList/curl-request.adoc[]
+
+==== Response Fields
+
+include::{snippets}/place/getList/response-fields.adoc[]
+
+
+=== 장소 수정
+
+==== HTTP Request
+
+include::{snippets}/place/update/http-request.adoc[]
+
+==== HTTP Response
+
+include::{snippets}/place/update/http-response.adoc[]
+
+==== CURL Request
+
+include::{snippets}/place/update/curl-request.adoc[]
+
+==== Path Parameter
+
+include::{snippets}/place/update/path-parameters.adoc[]
+
+==== Request Fields
+
+include::{snippets}/place/update/request-fields.adoc[]
+
+==== Response Fields
+
+include::{snippets}/place/update/response-fields.adoc[]
+
+
+=== 장소 삭제
+
+==== HTTP Request
+
+include::{snippets}/place/delete/http-request.adoc[]
+
+==== HTTP Response
+
+include::{snippets}/place/delete/http-response.adoc[]
+
+==== CURL Request
+
+include::{snippets}/place/delete/curl-request.adoc[]
+
+==== Path Parameter
+
+include::{snippets}/place/delete/path-parameters.adoc[]
