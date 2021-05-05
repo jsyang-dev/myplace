@@ -39,4 +39,8 @@ public class PlaceService {
         place.update(placeRequest.toPlace());
         return PlaceResponse.of(place);
     }
+
+    public void deletePlace(Long id) {
+        placeRepository.deleteById(id);
+    }
 }

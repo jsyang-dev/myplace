@@ -13,6 +13,9 @@ import java.util.stream.Collectors;
 import static info.myplace.placeapi.place.PlaceSteps.수리산_산림욕장;
 import static info.myplace.placeapi.place.PlaceSteps.초막골_생태공원;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 @DisplayName("장소 관리 테스트")
 class PlaceServiceTest extends ServiceTest {
@@ -89,5 +92,19 @@ class PlaceServiceTest extends ServiceTest {
         assertThat(placeResponse.getRecommendCount()).isZero();
         assertThat(placeResponse.getReadCount()).isZero();
         assertThat(placeResponse.getDescription()).isEqualTo(초막골_생태공원.getDescription());
+    }
+
+    @Test
+    @DisplayName("장소를 삭제한다")
+    void deletePlace() {
+        // given
+        PlaceResponse createdPlaceResponse = placeService.createPlace(수리산_산림욕장);
+        PlaceService mockPlaceService = mock(PlaceService.class);
+
+        // when
+        mockPlaceService.deletePlace(createdPlaceResponse.getId());
+
+        // then
+        verify(mockPlaceService, times(1)).deletePlace(createdPlaceResponse.getId());
     }
 }
