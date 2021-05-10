@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.geo.Point;
 
+import java.util.List;
+
 @Getter
 @Builder
 @NoArgsConstructor
@@ -17,6 +19,7 @@ public class PlaceRequest {
     private Point point;
     private String imageUrl;
     private String description;
+    private List<TagRequest> tags;
 
     public Place toPlace() {
         return Place.builder()
