@@ -3,6 +3,7 @@ package info.myplace.placeapi.place.documentation;
 import info.myplace.placeapi.Documentation;
 import info.myplace.placeapi.place.application.PlaceService;
 import info.myplace.placeapi.place.dto.PlaceResponse;
+import info.myplace.placeapi.place.dto.TagResponse;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -39,6 +40,10 @@ class PlaceDocumentation extends Documentation {
             .recommendCount(0)
             .readCount(0)
             .description(수리산_산림욕장.getDescription())
+            .tags(Arrays.asList(
+                    TagResponse.builder().id(1L).name("산림욕장").build(),
+                    TagResponse.builder().id(2L).name("산책").build()
+            ))
             .build();
     PlaceResponse 초막골_생태공원_응답 = PlaceResponse.builder()
             .id(2L)
@@ -48,6 +53,10 @@ class PlaceDocumentation extends Documentation {
             .recommendCount(0)
             .readCount(0)
             .description(초막골_생태공원.getDescription())
+            .tags(Arrays.asList(
+                    TagResponse.builder().id(1L).name("생태공원").build(),
+                    TagResponse.builder().id(2L).name("산책").build()
+            ))
             .build();
 
     @MockBean
@@ -64,7 +73,8 @@ class PlaceDocumentation extends Documentation {
                 fieldWithPath("point.x").description("위도"),
                 fieldWithPath("point.y").description("경도"),
                 fieldWithPath("imageUrl").description("이미지 경로"),
-                fieldWithPath("description").description("장소 설명")
+                fieldWithPath("description").description("장소 설명"),
+                fieldWithPath("tags[].name").description("태그명")
         };
         FieldDescriptor[] responseFieldDescriptors = {
                 fieldWithPath("id").description("장소 ID"),
@@ -74,7 +84,9 @@ class PlaceDocumentation extends Documentation {
                 fieldWithPath("recommendCount").description("추천수"),
                 fieldWithPath("readCount").description("조회수"),
                 fieldWithPath("imageUrl").description("이미지 경로"),
-                fieldWithPath("description").description("장소 설명")
+                fieldWithPath("description").description("장소 설명"),
+                fieldWithPath("tags[].id").description("태그 ID"),
+                fieldWithPath("tags[].name").description("태그명")
         };
 
         // when
@@ -101,7 +113,9 @@ class PlaceDocumentation extends Documentation {
                 fieldWithPath("recommendCount").description("추천수"),
                 fieldWithPath("readCount").description("조회수"),
                 fieldWithPath("imageUrl").description("이미지 경로"),
-                fieldWithPath("description").description("장소 설명")
+                fieldWithPath("description").description("장소 설명"),
+                fieldWithPath("tags[].id").description("태그 ID"),
+                fieldWithPath("tags[].name").description("태그명")
         };
 
         // when
@@ -125,7 +139,9 @@ class PlaceDocumentation extends Documentation {
                 fieldWithPath("[].recommendCount").description("추천수"),
                 fieldWithPath("[].readCount").description("조회수"),
                 fieldWithPath("[].imageUrl").description("이미지 경로"),
-                fieldWithPath("[].description").description("장소 설명")
+                fieldWithPath("[].description").description("장소 설명"),
+                fieldWithPath("[].tags[].id").description("태그 ID"),
+                fieldWithPath("[].tags[].name").description("태그명")
         };
 
         // when
@@ -147,7 +163,8 @@ class PlaceDocumentation extends Documentation {
                 fieldWithPath("point.x").description("위도"),
                 fieldWithPath("point.y").description("경도"),
                 fieldWithPath("imageUrl").description("이미지 경로"),
-                fieldWithPath("description").description("장소 설명")
+                fieldWithPath("description").description("장소 설명"),
+                fieldWithPath("tags[].name").description("태그명")
         };
         FieldDescriptor[] responseFieldDescriptors = {
                 fieldWithPath("id").description("장소 ID"),
@@ -157,7 +174,9 @@ class PlaceDocumentation extends Documentation {
                 fieldWithPath("recommendCount").description("추천수"),
                 fieldWithPath("readCount").description("조회수"),
                 fieldWithPath("imageUrl").description("이미지 경로"),
-                fieldWithPath("description").description("장소 설명")
+                fieldWithPath("description").description("장소 설명"),
+                fieldWithPath("tags[].id").description("태그 ID"),
+                fieldWithPath("tags[].name").description("태그명")
         };
 
         // when

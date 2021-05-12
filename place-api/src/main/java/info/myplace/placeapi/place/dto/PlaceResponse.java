@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Getter;
 import org.springframework.data.geo.Point;
 
+import java.util.List;
+
 @Getter
 @Builder
 public class PlaceResponse {
@@ -16,6 +18,7 @@ public class PlaceResponse {
     private final int recommendCount;
     private final int readCount;
     private final String description;
+    private List<TagResponse> tags;
 
     public static PlaceResponse of(Place place) {
         return PlaceResponse.builder()
