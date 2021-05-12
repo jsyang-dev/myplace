@@ -2,6 +2,8 @@ package info.myplace.placeapi.place.application;
 
 import info.myplace.placeapi.ServiceTest;
 import info.myplace.placeapi.place.dto.PlaceResponse;
+import info.myplace.placeapi.place.dto.TagRequest;
+import info.myplace.placeapi.place.dto.TagResponse;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,11 +34,21 @@ class PlaceServiceTest extends ServiceTest {
         // then
         assertThat(placeResponse.getId()).isNotNull();
         assertThat(placeResponse.getName()).isEqualTo(수리산_산림욕장.getName());
-        assertThat(placeResponse.getPoint()).isEqualTo(수리산_산림욕장.getPoint());
         assertThat(placeResponse.getImageUrl()).isEqualTo(수리산_산림욕장.getImageUrl());
+        assertThat(placeResponse.getLatitude()).isEqualTo(수리산_산림욕장.getLatitude());
+        assertThat(placeResponse.getLongitude()).isEqualTo(수리산_산림욕장.getLongitude());
         assertThat(placeResponse.getRecommendCount()).isZero();
         assertThat(placeResponse.getReadCount()).isZero();
         assertThat(placeResponse.getDescription()).isEqualTo(수리산_산림욕장.getDescription());
+
+        List<String> tagNames = placeResponse.getTags()
+                .stream()
+                .map(TagResponse::getName)
+                .collect(Collectors.toList());
+        List<String> expectedTagNames = 수리산_산림욕장.getTags().stream()
+                .map(TagRequest::getName)
+                .collect(Collectors.toList());
+        assertThat(tagNames).containsAll(expectedTagNames);
     }
 
     @Test
@@ -51,11 +63,21 @@ class PlaceServiceTest extends ServiceTest {
         // then
         assertThat(placeResponse.getId()).isEqualTo(createdPlaceResponse.getId());
         assertThat(placeResponse.getName()).isEqualTo(createdPlaceResponse.getName());
-        assertThat(placeResponse.getPoint()).isEqualTo(createdPlaceResponse.getPoint());
         assertThat(placeResponse.getImageUrl()).isEqualTo(createdPlaceResponse.getImageUrl());
+        assertThat(placeResponse.getLatitude()).isEqualTo(createdPlaceResponse.getLatitude());
+        assertThat(placeResponse.getLongitude()).isEqualTo(createdPlaceResponse.getLongitude());
         assertThat(placeResponse.getRecommendCount()).isEqualTo(createdPlaceResponse.getRecommendCount());
         assertThat(placeResponse.getReadCount()).isEqualTo(createdPlaceResponse.getReadCount());
         assertThat(placeResponse.getDescription()).isEqualTo(createdPlaceResponse.getDescription());
+
+        List<String> tagNames = placeResponse.getTags()
+                .stream()
+                .map(TagResponse::getName)
+                .collect(Collectors.toList());
+        List<String> expectedTagNames = 수리산_산림욕장.getTags().stream()
+                .map(TagRequest::getName)
+                .collect(Collectors.toList());
+        assertThat(tagNames).containsAll(expectedTagNames);
     }
 
     @Test
@@ -87,11 +109,21 @@ class PlaceServiceTest extends ServiceTest {
         // then
         assertThat(placeResponse.getId()).isEqualTo(createdPlaceResponse.getId());
         assertThat(placeResponse.getName()).isEqualTo(초막골_생태공원.getName());
-        assertThat(placeResponse.getPoint()).isEqualTo(초막골_생태공원.getPoint());
         assertThat(placeResponse.getImageUrl()).isEqualTo(초막골_생태공원.getImageUrl());
+        assertThat(placeResponse.getLatitude()).isEqualTo(초막골_생태공원.getLatitude());
+        assertThat(placeResponse.getLongitude()).isEqualTo(초막골_생태공원.getLongitude());
         assertThat(placeResponse.getRecommendCount()).isZero();
         assertThat(placeResponse.getReadCount()).isZero();
         assertThat(placeResponse.getDescription()).isEqualTo(초막골_생태공원.getDescription());
+
+        List<String> tagNames = placeResponse.getTags()
+                .stream()
+                .map(TagResponse::getName)
+                .collect(Collectors.toList());
+        List<String> expectedTagNames = 초막골_생태공원.getTags().stream()
+                .map(TagRequest::getName)
+                .collect(Collectors.toList());
+        assertThat(tagNames).containsAll(expectedTagNames);
     }
 
     @Test

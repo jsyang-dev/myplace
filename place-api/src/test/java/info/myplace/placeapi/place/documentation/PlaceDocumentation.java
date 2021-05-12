@@ -35,8 +35,9 @@ class PlaceDocumentation extends Documentation {
     PlaceResponse 수리산_산림욕장_응답 = PlaceResponse.builder()
             .id(1L)
             .name(수리산_산림욕장.getName())
-            .point(수리산_산림욕장.getPoint())
             .imageUrl(수리산_산림욕장.getImageUrl())
+            .latitude(수리산_산림욕장.getLatitude())
+            .longitude(수리산_산림욕장.getLongitude())
             .recommendCount(0)
             .readCount(0)
             .description(수리산_산림욕장.getDescription())
@@ -48,8 +49,9 @@ class PlaceDocumentation extends Documentation {
     PlaceResponse 초막골_생태공원_응답 = PlaceResponse.builder()
             .id(2L)
             .name(초막골_생태공원.getName())
-            .point(초막골_생태공원.getPoint())
             .imageUrl(초막골_생태공원.getImageUrl())
+            .latitude(초막골_생태공원.getLatitude())
+            .longitude(초막골_생태공원.getLongitude())
             .recommendCount(0)
             .readCount(0)
             .description(초막골_생태공원.getDescription())
@@ -70,20 +72,20 @@ class PlaceDocumentation extends Documentation {
 
         FieldDescriptor[] requestFieldDescriptors = {
                 fieldWithPath("name").description("장소명"),
-                fieldWithPath("point.x").description("위도"),
-                fieldWithPath("point.y").description("경도"),
                 fieldWithPath("imageUrl").description("이미지 경로"),
+                fieldWithPath("latitude").description("위도"),
+                fieldWithPath("longitude").description("경도"),
                 fieldWithPath("description").description("장소 설명"),
                 fieldWithPath("tags[].name").description("태그명")
         };
         FieldDescriptor[] responseFieldDescriptors = {
                 fieldWithPath("id").description("장소 ID"),
                 fieldWithPath("name").description("장소명"),
-                fieldWithPath("point.x").description("위도"),
-                fieldWithPath("point.y").description("경도"),
+                fieldWithPath("imageUrl").description("이미지 경로"),
+                fieldWithPath("latitude").description("위도"),
+                fieldWithPath("longitude").description("경도"),
                 fieldWithPath("recommendCount").description("추천수"),
                 fieldWithPath("readCount").description("조회수"),
-                fieldWithPath("imageUrl").description("이미지 경로"),
                 fieldWithPath("description").description("장소 설명"),
                 fieldWithPath("tags[].id").description("태그 ID"),
                 fieldWithPath("tags[].name").description("태그명")
@@ -108,11 +110,11 @@ class PlaceDocumentation extends Documentation {
         FieldDescriptor[] responseFieldDescriptors = {
                 fieldWithPath("id").description("장소 ID"),
                 fieldWithPath("name").description("장소명"),
-                fieldWithPath("point.x").description("위도"),
-                fieldWithPath("point.y").description("경도"),
+                fieldWithPath("imageUrl").description("이미지 경로"),
+                fieldWithPath("latitude").description("위도"),
+                fieldWithPath("longitude").description("경도"),
                 fieldWithPath("recommendCount").description("추천수"),
                 fieldWithPath("readCount").description("조회수"),
-                fieldWithPath("imageUrl").description("이미지 경로"),
                 fieldWithPath("description").description("장소 설명"),
                 fieldWithPath("tags[].id").description("태그 ID"),
                 fieldWithPath("tags[].name").description("태그명")
@@ -134,11 +136,11 @@ class PlaceDocumentation extends Documentation {
         FieldDescriptor[] responseFieldDescriptors = {
                 fieldWithPath("[].id").description("장소 ID"),
                 fieldWithPath("[].name").description("장소명"),
-                fieldWithPath("[].point.x").description("위도"),
-                fieldWithPath("[].point.y").description("경도"),
+                fieldWithPath("[].imageUrl").description("이미지 경로"),
+                fieldWithPath("[].latitude").description("위도"),
+                fieldWithPath("[].longitude").description("경도"),
                 fieldWithPath("[].recommendCount").description("추천수"),
                 fieldWithPath("[].readCount").description("조회수"),
-                fieldWithPath("[].imageUrl").description("이미지 경로"),
                 fieldWithPath("[].description").description("장소 설명"),
                 fieldWithPath("[].tags[].id").description("태그 ID"),
                 fieldWithPath("[].tags[].name").description("태그명")
@@ -160,20 +162,20 @@ class PlaceDocumentation extends Documentation {
         };
         FieldDescriptor[] requestFieldDescriptors = {
                 fieldWithPath("name").description("장소명"),
-                fieldWithPath("point.x").description("위도"),
-                fieldWithPath("point.y").description("경도"),
                 fieldWithPath("imageUrl").description("이미지 경로"),
+                fieldWithPath("latitude").description("위도"),
+                fieldWithPath("longitude").description("경도"),
                 fieldWithPath("description").description("장소 설명"),
                 fieldWithPath("tags[].name").description("태그명")
         };
         FieldDescriptor[] responseFieldDescriptors = {
                 fieldWithPath("id").description("장소 ID"),
                 fieldWithPath("name").description("장소명"),
-                fieldWithPath("point.x").description("위도"),
-                fieldWithPath("point.y").description("경도"),
+                fieldWithPath("imageUrl").description("이미지 경로"),
+                fieldWithPath("latitude").description("위도"),
+                fieldWithPath("longitude").description("경도"),
                 fieldWithPath("recommendCount").description("추천수"),
                 fieldWithPath("readCount").description("조회수"),
-                fieldWithPath("imageUrl").description("이미지 경로"),
                 fieldWithPath("description").description("장소 설명"),
                 fieldWithPath("tags[].id").description("태그 ID"),
                 fieldWithPath("tags[].name").description("태그명")
