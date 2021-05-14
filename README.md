@@ -92,4 +92,12 @@
   - 장소 수정
   - 장소 삭제
 - Issue: <https://github.com/jsyang-dev/myplace/issues/4>
-- Branch: <https://github.com/jsyang-dev/myplace/tree/feature/4>
+
+- 태그 관리 기능
+  - 장소 관리 기능 수정
+    - 장소 저장: 태그 저장
+    - 장소 조회: 태그 리스트 조회
+    - 장소 삭제: 태그 삭제
+  - 태그 추가
+  - 태그 제거
+- Issue: <https://github.com/jsyang-dev/myplace/issues/11>

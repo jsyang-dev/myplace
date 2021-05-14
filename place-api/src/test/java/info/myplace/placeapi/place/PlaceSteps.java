@@ -2,14 +2,15 @@ package info.myplace.placeapi.place;
 
 import info.myplace.placeapi.place.dto.PlaceRequest;
 import info.myplace.placeapi.place.dto.PlaceResponse;
+import info.myplace.placeapi.place.dto.TagRequest;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
-import org.springframework.data.geo.Point;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,16 +22,20 @@ public class PlaceSteps {
 
     public static final PlaceRequest 수리산_산림욕장 = PlaceRequest.builder()
             .name("수리산 산림욕장")
-            .point(new Point(37.356683, 126.915901))
             .imageUrl("/image/surisan.jpg")
+            .latitude(37.356683)
+            .longitude(126.915901)
             .description("경기도 안양시와 군포시 경계에 있는 산림욕장")
+            .tags(Arrays.asList(new TagRequest("산림욕장"), new TagRequest("산책")))
             .build();
 
     public static final PlaceRequest 초막골_생태공원 = PlaceRequest.builder()
             .name("초막골 생태공원")
-            .point(new Point(37.353632, 126.918564))
             .imageUrl("/image/chomakgol.jpg")
+            .latitude(37.353632)
+            .longitude(126.918564)
             .description("경기도 군포시에 있는 생태를 테마로 한 도시공원")
+            .tags(Arrays.asList(new TagRequest("생태공원"), new TagRequest("산책")))
             .build();
 
     public static ExtractableResponse<Response> 장소_생성_요청(RequestSpecification given, PlaceRequest placeRequest) {
