@@ -17,6 +17,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 @DisplayName("태그 관리 인수 테스트")
 class TagAcceptanceTest extends AcceptanceTest {
 
+    // TODO: 장소 수정, 태그 추가 시 리턴 없음
+
     @Test
     @DisplayName("태그를 추가한다")
     void addTag() {

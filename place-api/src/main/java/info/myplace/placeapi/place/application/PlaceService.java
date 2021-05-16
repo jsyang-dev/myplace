@@ -4,15 +4,18 @@ import info.myplace.placeapi.place.domain.Place;
 import info.myplace.placeapi.place.domain.PlaceRepository;
 import info.myplace.placeapi.place.dto.PlaceRequest;
 import info.myplace.placeapi.place.dto.PlaceResponse;
+import info.myplace.placeapi.place.dto.TagRequest;
 import info.myplace.placeapi.place.exception.PlaceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class PlaceService {
 
     private final PlaceRepository placeRepository;
@@ -22,11 +25,13 @@ public class PlaceService {
         return PlaceResponse.of(place);
     }
 
+    @Transactional(readOnly = true)
     public PlaceResponse getPlace(Long id) {
         Place place = placeRepository.findById(id).orElseThrow(() -> new PlaceNotFoundException(id));
         return PlaceResponse.of(place);
     }
 
+    @Transactional(readOnly = true)
     public List<PlaceResponse> getPlaces() {
         List<Place> places = placeRepository.findAll();
         return places.stream()
@@ -42,5 +47,11 @@ public class PlaceService {
 
     public void deletePlace(Long id) {
         placeRepository.deleteById(id);
+    }
+
+    public PlaceResponse addTag(Long placeId, TagRequest tagRequest) {
+        Place place = placeRepository.findById(placeId).orElseThrow(() -> new PlaceNotFoundException(placeId));
+        place.addTag(tagRequest.toTag());
+        return PlaceResponse.of(place);
     }
 }

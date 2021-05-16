@@ -3,6 +3,7 @@ package info.myplace.placeapi.place.ui;
 import info.myplace.placeapi.place.application.PlaceService;
 import info.myplace.placeapi.place.dto.PlaceRequest;
 import info.myplace.placeapi.place.dto.PlaceResponse;
+import info.myplace.placeapi.place.dto.TagRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -52,5 +53,11 @@ public class PlaceController {
     public ResponseEntity<Void> deletePlaces(@PathVariable Long id) {
         placeService.deletePlace(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("/{placeId}/tags")
+    public ResponseEntity<PlaceResponse> createPlace(@PathVariable Long placeId, @RequestBody TagRequest tagRequest) {
+        PlaceResponse placeResponse = placeService.addTag(placeId, tagRequest);
+        return ResponseEntity.ok(placeResponse);
     }
 }

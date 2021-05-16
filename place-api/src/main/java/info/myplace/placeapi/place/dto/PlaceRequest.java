@@ -9,7 +9,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Getter
 @Builder
@@ -25,16 +24,17 @@ public class PlaceRequest {
     private List<TagRequest> tags;
 
     public Place toPlace() {
-        return Place.builder()
+        Place place = Place.builder()
                 .name(name)
                 .imageUrl(imageUrl)
                 .location(Location.builder().latitude(latitude).longitude(longitude).build())
                 .description(description)
-                .tags(
-                        tags.stream()
-                                .map(it -> Tag.builder().name(it.getName()).build())
-                                .collect(Collectors.toList())
-                )
                 .build();
+
+        this.tags.stream()
+                .map(it -> Tag.builder().name(it.getName()).place(place).build())
+                .forEach(place::addTag);
+
+        return place;
     }
 }
