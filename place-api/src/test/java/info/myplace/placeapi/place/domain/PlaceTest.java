@@ -16,6 +16,27 @@ class PlaceTest {
             .build();
 
     @Test
+    @DisplayName("장소를 수정한다")
+    void update() {
+        // given
+        Place updatePlace = Place.builder()
+                .name("초막골 생태공원")
+                .imageUrl("/image/chomakgol.jpg")
+                .location(Location.builder().latitude(37.353632).longitude(126.918564).build())
+                .description("경기도 군포시에 있는 생태를 테마로 한 도시공원")
+                .build();
+
+        // when
+        place.update(updatePlace);
+
+        // then
+        assertThat(place.getName()).isEqualTo(updatePlace.getName());
+        assertThat(place.getImageUrl()).isEqualTo(updatePlace.getImageUrl());
+        assertThat(place.getLocation()).isEqualTo(updatePlace.getLocation());
+        assertThat(place.getDescription()).isEqualTo(updatePlace.getDescription());
+    }
+
+    @Test
     @DisplayName("태그를 추가한다")
     void addTag() {
         // given
