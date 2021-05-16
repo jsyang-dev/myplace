@@ -39,19 +39,17 @@ public class PlaceService {
                 .collect(Collectors.toList());
     }
 
-    public PlaceResponse updatePlace(Long id, PlaceRequest placeRequest) {
+    public void updatePlace(Long id, PlaceRequest placeRequest) {
         Place place = placeRepository.findById(id).orElseThrow(() -> new PlaceNotFoundException(id));
         place.update(placeRequest.toPlace());
-        return PlaceResponse.of(place);
     }
 
     public void deletePlace(Long id) {
         placeRepository.deleteById(id);
     }
 
-    public PlaceResponse addTag(Long placeId, TagRequest tagRequest) {
+    public void addTag(Long placeId, TagRequest tagRequest) {
         Place place = placeRepository.findById(placeId).orElseThrow(() -> new PlaceNotFoundException(placeId));
         place.addTag(tagRequest.toTag());
-        return PlaceResponse.of(place);
     }
 }

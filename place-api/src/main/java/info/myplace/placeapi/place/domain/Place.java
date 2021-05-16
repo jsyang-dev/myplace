@@ -60,7 +60,6 @@ public class Place extends BaseEntity {
         this.location.setLatitude(place.getLocation().getLatitude());
         this.location.setLongitude(place.getLocation().getLongitude());
         this.description = place.getDescription();
-        this.tags = place.getTags();
     }
 
     public void addTag(Tag tag) {

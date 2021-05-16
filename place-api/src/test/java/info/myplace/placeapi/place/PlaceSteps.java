@@ -8,8 +8,6 @@ import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import org.springframework.http.MediaType;
 
-import java.util.Arrays;
-
 public class PlaceSteps {
 
     private static final String URI_PLACES = "/places";
@@ -21,7 +19,6 @@ public class PlaceSteps {
             .latitude(37.356683)
             .longitude(126.915901)
             .description("경기도 안양시와 군포시 경계에 있는 산림욕장")
-            .tags(Arrays.asList(new TagRequest("산림욕장"), new TagRequest("산책")))
             .build();
 
     public static final PlaceRequest 초막골_생태공원 = PlaceRequest.builder()
@@ -30,11 +27,14 @@ public class PlaceSteps {
             .latitude(37.353632)
             .longitude(126.918564)
             .description("경기도 군포시에 있는 생태를 테마로 한 도시공원")
-            .tags(Arrays.asList(new TagRequest("생태공원"), new TagRequest("산책")))
             .build();
 
-    public static final TagRequest 산림욕장_태그 = TagRequest.builder()
+    public static final TagRequest 태그_산림욕장 = TagRequest.builder()
             .name("산림욕장")
+            .build();
+
+    public static final TagRequest 태그_산책 = TagRequest.builder()
+            .name("산책")
             .build();
 
     public static ExtractableResponse<Response> 장소_생성_요청(RequestSpecification given, PlaceRequest placeRequest) {

@@ -44,9 +44,9 @@ public class PlaceController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<PlaceResponse> updatePlaces(@PathVariable Long id, @RequestBody PlaceRequest placeRequest) {
-        PlaceResponse placeResponse = placeService.updatePlace(id, placeRequest);
-        return ResponseEntity.ok(placeResponse);
+    public ResponseEntity<Void> updatePlaces(@PathVariable Long id, @RequestBody PlaceRequest placeRequest) {
+        placeService.updatePlace(id, placeRequest);
+        return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/{id}")
@@ -56,8 +56,8 @@ public class PlaceController {
     }
 
     @PostMapping("/{placeId}/tags")
-    public ResponseEntity<PlaceResponse> createPlace(@PathVariable Long placeId, @RequestBody TagRequest tagRequest) {
-        PlaceResponse placeResponse = placeService.addTag(placeId, tagRequest);
-        return ResponseEntity.ok(placeResponse);
+    public ResponseEntity<Void> createPlace(@PathVariable Long placeId, @RequestBody TagRequest tagRequest) {
+        placeService.addTag(placeId, tagRequest);
+        return ResponseEntity.ok().build();
     }
 }

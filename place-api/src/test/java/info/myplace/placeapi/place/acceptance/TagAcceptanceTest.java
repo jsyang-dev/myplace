@@ -8,16 +8,14 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 
-import static info.myplace.placeapi.place.PlaceSteps.산림욕장_태그;
 import static info.myplace.placeapi.place.PlaceSteps.수리산_산림욕장;
 import static info.myplace.placeapi.place.PlaceSteps.장소_생성_요청;
+import static info.myplace.placeapi.place.PlaceSteps.태그_산림욕장;
 import static info.myplace.placeapi.place.PlaceSteps.태그_추가_요청;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("태그 관리 인수 테스트")
 class TagAcceptanceTest extends AcceptanceTest {
-
-    // TODO: 장소 수정, 태그 추가 시 리턴 없음
 
     @Test
     @DisplayName("태그를 추가한다")
@@ -26,7 +24,7 @@ class TagAcceptanceTest extends AcceptanceTest {
         PlaceResponse placeResponse = 장소_생성_요청(given(), 수리산_산림욕장).as(PlaceResponse.class);
 
         // when
-        ExtractableResponse<Response> response = 태그_추가_요청(given(), placeResponse, 산림욕장_태그);
+        ExtractableResponse<Response> response = 태그_추가_요청(given(), placeResponse, 태그_산림욕장);
 
         // then
         태그_추가됨(response);
