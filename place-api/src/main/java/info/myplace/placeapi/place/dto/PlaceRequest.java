@@ -1,5 +1,6 @@
 package info.myplace.placeapi.place.dto;
 
+import info.myplace.placeapi.place.domain.Location;
 import info.myplace.placeapi.place.domain.Place;
 import info.myplace.placeapi.place.domain.Tag;
 import lombok.AllArgsConstructor;
@@ -27,8 +28,7 @@ public class PlaceRequest {
         return Place.builder()
                 .name(name)
                 .imageUrl(imageUrl)
-                .latitude(latitude)
-                .longitude(longitude)
+                .location(Location.builder().latitude(latitude).longitude(longitude).build())
                 .description(description)
                 .tags(
                         tags.stream()

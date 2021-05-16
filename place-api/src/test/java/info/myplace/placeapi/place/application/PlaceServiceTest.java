@@ -19,7 +19,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
-@DisplayName("장소 관리 테스트")
+@DisplayName("장소 관리 서비스 테스트")
 class PlaceServiceTest extends ServiceTest {
 
     @Autowired

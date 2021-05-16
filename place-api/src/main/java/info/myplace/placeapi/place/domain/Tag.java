@@ -31,4 +31,9 @@ public class Tag {
     @ManyToOne
     @JoinColumn(name = "place_id", insertable = false, updatable = false)
     private Place place;
+
+    public void setPlace(Place place) {
+        this.place = place;
+        this.place.getTags().add(this);
+    }
 }

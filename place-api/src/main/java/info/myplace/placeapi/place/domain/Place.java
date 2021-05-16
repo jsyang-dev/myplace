@@ -21,6 +21,7 @@ import java.util.List;
 
 @Entity
 @Getter
+@Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Place extends BaseEntity {
@@ -39,25 +40,19 @@ public class Place extends BaseEntity {
     private Location location;
 
     @Column
+    @Builder.Default
     private int recommendCount = 0;
 
     @Column
+    @Builder.Default
     private int readCount = 0;
 
     @Column(columnDefinition = "text")
     private String description;
 
-    @OneToMany(mappedBy = "place", cascade = CascadeType.PERSIST, orphanRemoval = true, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "place", fetch = FetchType.EAGER, cascade = CascadeType.PERSIST, orphanRemoval = true)
+    @Builder.Default
     private List<Tag> tags = new ArrayList<>();
-
-    @Builder
-    private Place(String name, String imageUrl, double latitude, double longitude, String description, List<Tag> tags) {
-        this.name = name;
-        this.location = Location.builder().longitude(longitude).latitude(latitude).build();
-        this.imageUrl = imageUrl;
-        this.description = description;
-        this.tags = tags;
-    }
 
     public void update(Place place) {
         this.name = place.getName();
@@ -66,5 +61,9 @@ public class Place extends BaseEntity {
         this.location.setLongitude(place.getLocation().getLongitude());
         this.description = place.getDescription();
         this.tags = place.getTags();
+    }
+
+    public void addTag(Tag tag) {
+        tag.setPlace(this);
     }
 }
