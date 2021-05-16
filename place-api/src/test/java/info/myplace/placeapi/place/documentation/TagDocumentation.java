@@ -11,12 +11,11 @@ import org.springframework.restdocs.payload.FieldDescriptor;
 
 import java.util.Arrays;
 
-import static info.myplace.placeapi.place.PlaceSteps.산림욕장_태그;
 import static info.myplace.placeapi.place.PlaceSteps.수리산_산림욕장;
+import static info.myplace.placeapi.place.PlaceSteps.태그_산림욕장;
 import static info.myplace.placeapi.place.PlaceSteps.태그_추가_요청;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
 import static org.springframework.restdocs.payload.PayloadDocumentation.requestFields;
-import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
 
 @DisplayName("태그 관리 문서화")
 class TagDocumentation extends Documentation {
@@ -46,24 +45,12 @@ class TagDocumentation extends Documentation {
         FieldDescriptor[] requestFieldDescriptors = {
                 fieldWithPath("name").description("태그명")
         };
-        FieldDescriptor[] responseFieldDescriptors = {
-                fieldWithPath("id").description("장소 ID"),
-                fieldWithPath("name").description("장소명"),
-                fieldWithPath("imageUrl").description("이미지 경로"),
-                fieldWithPath("latitude").description("위도"),
-                fieldWithPath("longitude").description("경도"),
-                fieldWithPath("recommendCount").description("추천수"),
-                fieldWithPath("readCount").description("조회수"),
-                fieldWithPath("description").description("장소 설명"),
-                fieldWithPath("tags[].id").description("태그 ID"),
-                fieldWithPath("tags[].name").description("태그명")
-        };
 
         // when
         태그_추가_요청(
-                given("tag/add", requestFields(requestFieldDescriptors), responseFields(responseFieldDescriptors)),
+                given("tag/add", requestFields(requestFieldDescriptors)),
                 수리산_산림욕장_응답,
-                산림욕장_태그
+                태그_산림욕장
         );
     }
 }

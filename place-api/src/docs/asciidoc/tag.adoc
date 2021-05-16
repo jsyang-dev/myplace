@@ -18,7 +18,3 @@ include::{snippets}/tag/add/curl-request.adoc[]
 ==== Request Fields
 
 include::{snippets}/tag/add/request-fields.adoc[]
-
-==== Response Fields
-
-include::{snippets}/tag/add/response-fields.adoc[]
