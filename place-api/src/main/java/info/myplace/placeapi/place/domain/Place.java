@@ -18,6 +18,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 @Getter
@@ -64,5 +65,13 @@ public class Place extends BaseEntity {
 
     public void addTag(Tag tag) {
         tag.setPlace(this);
+    }
+
+    public void removeTag(String tagName) {
+        tags.removeAll(
+                tags.stream()
+                        .filter(it -> it.getName().equals(tagName))
+                        .collect(Collectors.toList())
+        );
     }
 }
