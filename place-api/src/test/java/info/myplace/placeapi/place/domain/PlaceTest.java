@@ -51,4 +51,21 @@ class PlaceTest {
         assertThat(place.getTags().size()).isEqualTo(1);
         assertThat(tag.getPlace()).isEqualTo(place);
     }
+
+    @Test
+    @DisplayName("태그를 제거한다")
+    void removeTag() {
+        // given
+        Tag tag = Tag.builder()
+                .name("산림욕장")
+                .build();
+        place.addTag(tag);
+        place.addTag(tag);
+
+        // when
+        place.removeTag(tag.getName());
+
+        //then
+        assertThat(place.getTags().size()).isZero();
+    }
 }
