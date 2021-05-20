@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import static info.myplace.placeapi.place.PlaceSteps.수리산_산림욕장;
 import static info.myplace.placeapi.place.PlaceSteps.장소_생성_요청;
 import static info.myplace.placeapi.place.PlaceSteps.태그_산림욕장;
+import static info.myplace.placeapi.place.PlaceSteps.태그_제거_요청;
 import static info.myplace.placeapi.place.PlaceSteps.태그_추가_요청;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -30,7 +31,25 @@ class TagAcceptanceTest extends AcceptanceTest {
         태그_추가됨(response);
     }
 
+    @Test
+    @DisplayName("태그를 제거한다")
+    void removeTag() {
+        // given
+        PlaceResponse placeResponse = 장소_생성_요청(given(), 수리산_산림욕장).as(PlaceResponse.class);
+        태그_추가_요청(given(), placeResponse, 태그_산림욕장);
+
+        // when
+        ExtractableResponse<Response> response = 태그_제거_요청(given(), placeResponse, 태그_산림욕장);
+
+        // then
+        태그_제거됨(response);
+    }
+
     private void 태그_추가됨(ExtractableResponse<Response> response) {
+        assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value());
+    }
+
+    private void 태그_제거됨(ExtractableResponse<Response> response) {
         assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value());
     }
 }

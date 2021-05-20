@@ -95,4 +95,12 @@ public class PlaceSteps {
                 .then().log().all()
                 .extract();
     }
+
+    public static ExtractableResponse<Response> 태그_제거_요청(RequestSpecification given, PlaceResponse placeResponse, TagRequest tagRequest) {
+        return given
+                .when()
+                .delete(URI_PLACES + "/{placeId}" + URI_TAGS + "?tagName={tagName}", placeResponse.getId(), tagRequest.getName())
+                .then().log().all()
+                .extract();
+    }
 }
