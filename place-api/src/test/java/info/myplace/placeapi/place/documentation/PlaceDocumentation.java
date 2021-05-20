@@ -75,8 +75,7 @@ class PlaceDocumentation extends Documentation {
                 fieldWithPath("imageUrl").description("이미지 경로"),
                 fieldWithPath("latitude").description("위도"),
                 fieldWithPath("longitude").description("경도"),
-                fieldWithPath("description").description("장소 설명"),
-                fieldWithPath("tags[].name").description("태그명")
+                fieldWithPath("description").description("장소 설명")
         };
         FieldDescriptor[] responseFieldDescriptors = {
                 fieldWithPath("id").description("장소 ID"),
@@ -155,7 +154,6 @@ class PlaceDocumentation extends Documentation {
     void updatePlace() {
         // given
         ReflectionTestUtils.setField(초막골_생태공원_응답, "id", 1L);
-        when(placeService.updatePlace(anyLong(), any())).thenReturn(초막골_생태공원_응답);
 
         ParameterDescriptor[] pathParameterDescriptors = {
                 parameterWithName("id").description("장소 ID")
@@ -165,25 +163,12 @@ class PlaceDocumentation extends Documentation {
                 fieldWithPath("imageUrl").description("이미지 경로"),
                 fieldWithPath("latitude").description("위도"),
                 fieldWithPath("longitude").description("경도"),
-                fieldWithPath("description").description("장소 설명"),
-                fieldWithPath("tags[].name").description("태그명")
-        };
-        FieldDescriptor[] responseFieldDescriptors = {
-                fieldWithPath("id").description("장소 ID"),
-                fieldWithPath("name").description("장소명"),
-                fieldWithPath("imageUrl").description("이미지 경로"),
-                fieldWithPath("latitude").description("위도"),
-                fieldWithPath("longitude").description("경도"),
-                fieldWithPath("recommendCount").description("추천수"),
-                fieldWithPath("readCount").description("조회수"),
-                fieldWithPath("description").description("장소 설명"),
-                fieldWithPath("tags[].id").description("태그 ID"),
-                fieldWithPath("tags[].name").description("태그명")
+                fieldWithPath("description").description("장소 설명")
         };
 
         // when
         장소_수정_요청(
-                given("place/update", pathParameters(pathParameterDescriptors), requestFields(requestFieldDescriptors), responseFields(responseFieldDescriptors)),
+                given("place/update", pathParameters(pathParameterDescriptors), requestFields(requestFieldDescriptors)),
                 수리산_산림욕장_응답,
                 초막골_생태공원
         );

@@ -1,0 +1,20 @@
+[[tag]]
+== 태그(tag)
+
+=== 태그 추가
+
+==== HTTP Request
+
+include::{snippets}/tag/add/http-request.adoc[]
+
+==== HTTP Response
+
+include::{snippets}/tag/add/http-response.adoc[]
+
+==== CURL Request
+
+include::{snippets}/tag/add/curl-request.adoc[]
+
+==== Request Fields
+
+include::{snippets}/tag/add/request-fields.adoc[]

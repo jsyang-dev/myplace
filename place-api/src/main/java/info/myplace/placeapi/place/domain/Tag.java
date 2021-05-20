@@ -29,6 +29,11 @@ public class Tag {
     private String name;
 
     @ManyToOne
-    @JoinColumn(name = "place_id", insertable = false, updatable = false)
+    @JoinColumn(name = "place_id")
     private Place place;
+
+    public void setPlace(Place place) {
+        this.place = place;
+        this.place.getTags().add(this);
+    }
 }
