@@ -6,13 +6,19 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.data.geo.Point;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 @Getter
@@ -29,10 +35,10 @@ public class Place extends BaseEntity {
     private String name;
 
     @Column
-    private Point point;
-
-    @Column
     private String imageUrl;
+
+    @Embedded
+    private Location location;
 
     @Column
     @Builder.Default
@@ -45,18 +51,27 @@ public class Place extends BaseEntity {
     @Column(columnDefinition = "text")
     private String description;
 
-    @Builder
-    private Place(String name, Point point, String imageUrl, String description) {
-        this.name = name;
-        this.point = point;
-        this.imageUrl = imageUrl;
-        this.description = description;
-    }
+    @OneToMany(mappedBy = "place", fetch = FetchType.EAGER, cascade = CascadeType.PERSIST, orphanRemoval = true)
+    @Builder.Default
+    private List<Tag> tags = new ArrayList<>();
 
     public void update(Place place) {
         this.name = place.getName();
-        this.point = place.getPoint();
         this.imageUrl = place.getImageUrl();
+        this.location.setLatitude(place.getLocation().getLatitude());
+        this.location.setLongitude(place.getLocation().getLongitude());
         this.description = place.getDescription();
+    }
+
+    public void addTag(Tag tag) {
+        tag.setPlace(this);
+    }
+
+    public void removeTag(String tagName) {
+        tags.removeAll(
+                tags.stream()
+                        .filter(it -> it.getName().equals(tagName))
+                        .collect(Collectors.toList())
+        );
     }
 }

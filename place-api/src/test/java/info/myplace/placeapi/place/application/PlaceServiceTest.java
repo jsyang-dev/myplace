@@ -2,6 +2,8 @@ package info.myplace.placeapi.place.application;
 
 import info.myplace.placeapi.ServiceTest;
 import info.myplace.placeapi.place.dto.PlaceResponse;
+import info.myplace.placeapi.place.dto.TagResponse;
+import info.myplace.placeapi.place.exception.PlaceNotFoundException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,12 +14,12 @@ import java.util.stream.Collectors;
 
 import static info.myplace.placeapi.place.PlaceSteps.수리산_산림욕장;
 import static info.myplace.placeapi.place.PlaceSteps.초막골_생태공원;
+import static info.myplace.placeapi.place.PlaceSteps.태그_산림욕장;
+import static info.myplace.placeapi.place.PlaceSteps.태그_산책;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-@DisplayName("장소 관리 테스트")
+@DisplayName("장소 관리 서비스 테스트")
 class PlaceServiceTest extends ServiceTest {
 
     @Autowired
@@ -32,8 +34,9 @@ class PlaceServiceTest extends ServiceTest {
         // then
         assertThat(placeResponse.getId()).isNotNull();
         assertThat(placeResponse.getName()).isEqualTo(수리산_산림욕장.getName());
-        assertThat(placeResponse.getPoint()).isEqualTo(수리산_산림욕장.getPoint());
         assertThat(placeResponse.getImageUrl()).isEqualTo(수리산_산림욕장.getImageUrl());
+        assertThat(placeResponse.getLatitude()).isEqualTo(수리산_산림욕장.getLatitude());
+        assertThat(placeResponse.getLongitude()).isEqualTo(수리산_산림욕장.getLongitude());
         assertThat(placeResponse.getRecommendCount()).isZero();
         assertThat(placeResponse.getReadCount()).isZero();
         assertThat(placeResponse.getDescription()).isEqualTo(수리산_산림욕장.getDescription());
@@ -44,6 +47,8 @@ class PlaceServiceTest extends ServiceTest {
     void getPlace() {
         // given
         PlaceResponse createdPlaceResponse = placeService.createPlace(수리산_산림욕장);
+        placeService.addTag(createdPlaceResponse.getId(), 태그_산림욕장);
+        placeService.addTag(createdPlaceResponse.getId(), 태그_산책);
 
         // when
         PlaceResponse placeResponse = placeService.getPlace(createdPlaceResponse.getId());
@@ -51,11 +56,18 @@ class PlaceServiceTest extends ServiceTest {
         // then
         assertThat(placeResponse.getId()).isEqualTo(createdPlaceResponse.getId());
         assertThat(placeResponse.getName()).isEqualTo(createdPlaceResponse.getName());
-        assertThat(placeResponse.getPoint()).isEqualTo(createdPlaceResponse.getPoint());
         assertThat(placeResponse.getImageUrl()).isEqualTo(createdPlaceResponse.getImageUrl());
+        assertThat(placeResponse.getLatitude()).isEqualTo(createdPlaceResponse.getLatitude());
+        assertThat(placeResponse.getLongitude()).isEqualTo(createdPlaceResponse.getLongitude());
         assertThat(placeResponse.getRecommendCount()).isEqualTo(createdPlaceResponse.getRecommendCount());
         assertThat(placeResponse.getReadCount()).isEqualTo(createdPlaceResponse.getReadCount());
         assertThat(placeResponse.getDescription()).isEqualTo(createdPlaceResponse.getDescription());
+
+        List<String> tagNames = placeResponse.getTags()
+                .stream()
+                .map(TagResponse::getName)
+                .collect(Collectors.toList());
+        assertThat(tagNames).containsAll(Arrays.asList(태그_산림욕장.getName(), 태그_산책.getName()));
     }
 
     @Test
@@ -82,13 +94,16 @@ class PlaceServiceTest extends ServiceTest {
         PlaceResponse createdPlaceResponse = placeService.createPlace(수리산_산림욕장);
 
         // when
-        PlaceResponse placeResponse = placeService.updatePlace(createdPlaceResponse.getId(), 초막골_생태공원);
+        placeService.updatePlace(createdPlaceResponse.getId(), 초막골_생태공원);
 
         // then
+        PlaceResponse placeResponse = placeService.getPlace(createdPlaceResponse.getId());
+
         assertThat(placeResponse.getId()).isEqualTo(createdPlaceResponse.getId());
         assertThat(placeResponse.getName()).isEqualTo(초막골_생태공원.getName());
-        assertThat(placeResponse.getPoint()).isEqualTo(초막골_생태공원.getPoint());
         assertThat(placeResponse.getImageUrl()).isEqualTo(초막골_생태공원.getImageUrl());
+        assertThat(placeResponse.getLatitude()).isEqualTo(초막골_생태공원.getLatitude());
+        assertThat(placeResponse.getLongitude()).isEqualTo(초막골_생태공원.getLongitude());
         assertThat(placeResponse.getRecommendCount()).isZero();
         assertThat(placeResponse.getReadCount()).isZero();
         assertThat(placeResponse.getDescription()).isEqualTo(초막골_생태공원.getDescription());
@@ -99,12 +114,12 @@ class PlaceServiceTest extends ServiceTest {
     void deletePlace() {
         // given
         PlaceResponse createdPlaceResponse = placeService.createPlace(수리산_산림욕장);
-        PlaceService mockPlaceService = mock(PlaceService.class);
 
         // when
-        mockPlaceService.deletePlace(createdPlaceResponse.getId());
+        placeService.deletePlace(1L);
 
         // then
-        verify(mockPlaceService, times(1)).deletePlace(createdPlaceResponse.getId());
+        Long id = createdPlaceResponse.getId();
+        assertThatThrownBy(() -> placeService.getPlace(id)).isInstanceOf(PlaceNotFoundException.class);
     }
 }

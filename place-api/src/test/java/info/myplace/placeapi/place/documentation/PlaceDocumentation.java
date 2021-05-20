@@ -3,6 +3,7 @@ package info.myplace.placeapi.place.documentation;
 import info.myplace.placeapi.Documentation;
 import info.myplace.placeapi.place.application.PlaceService;
 import info.myplace.placeapi.place.dto.PlaceResponse;
+import info.myplace.placeapi.place.dto.TagResponse;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -34,20 +35,30 @@ class PlaceDocumentation extends Documentation {
     PlaceResponse 수리산_산림욕장_응답 = PlaceResponse.builder()
             .id(1L)
             .name(수리산_산림욕장.getName())
-            .point(수리산_산림욕장.getPoint())
             .imageUrl(수리산_산림욕장.getImageUrl())
+            .latitude(수리산_산림욕장.getLatitude())
+            .longitude(수리산_산림욕장.getLongitude())
             .recommendCount(0)
             .readCount(0)
             .description(수리산_산림욕장.getDescription())
+            .tags(Arrays.asList(
+                    TagResponse.builder().id(1L).name("산림욕장").build(),
+                    TagResponse.builder().id(2L).name("산책").build()
+            ))
             .build();
     PlaceResponse 초막골_생태공원_응답 = PlaceResponse.builder()
             .id(2L)
             .name(초막골_생태공원.getName())
-            .point(초막골_생태공원.getPoint())
             .imageUrl(초막골_생태공원.getImageUrl())
+            .latitude(초막골_생태공원.getLatitude())
+            .longitude(초막골_생태공원.getLongitude())
             .recommendCount(0)
             .readCount(0)
             .description(초막골_생태공원.getDescription())
+            .tags(Arrays.asList(
+                    TagResponse.builder().id(1L).name("생태공원").build(),
+                    TagResponse.builder().id(2L).name("산책").build()
+            ))
             .build();
 
     @MockBean
@@ -61,20 +72,22 @@ class PlaceDocumentation extends Documentation {
 
         FieldDescriptor[] requestFieldDescriptors = {
                 fieldWithPath("name").description("장소명"),
-                fieldWithPath("point.x").description("위도"),
-                fieldWithPath("point.y").description("경도"),
                 fieldWithPath("imageUrl").description("이미지 경로"),
+                fieldWithPath("latitude").description("위도"),
+                fieldWithPath("longitude").description("경도"),
                 fieldWithPath("description").description("장소 설명")
         };
         FieldDescriptor[] responseFieldDescriptors = {
                 fieldWithPath("id").description("장소 ID"),
                 fieldWithPath("name").description("장소명"),
-                fieldWithPath("point.x").description("위도"),
-                fieldWithPath("point.y").description("경도"),
+                fieldWithPath("imageUrl").description("이미지 경로"),
+                fieldWithPath("latitude").description("위도"),
+                fieldWithPath("longitude").description("경도"),
                 fieldWithPath("recommendCount").description("추천수"),
                 fieldWithPath("readCount").description("조회수"),
-                fieldWithPath("imageUrl").description("이미지 경로"),
-                fieldWithPath("description").description("장소 설명")
+                fieldWithPath("description").description("장소 설명"),
+                fieldWithPath("tags[].id").description("태그 ID"),
+                fieldWithPath("tags[].name").description("태그명")
         };
 
         // when
@@ -96,12 +109,14 @@ class PlaceDocumentation extends Documentation {
         FieldDescriptor[] responseFieldDescriptors = {
                 fieldWithPath("id").description("장소 ID"),
                 fieldWithPath("name").description("장소명"),
-                fieldWithPath("point.x").description("위도"),
-                fieldWithPath("point.y").description("경도"),
+                fieldWithPath("imageUrl").description("이미지 경로"),
+                fieldWithPath("latitude").description("위도"),
+                fieldWithPath("longitude").description("경도"),
                 fieldWithPath("recommendCount").description("추천수"),
                 fieldWithPath("readCount").description("조회수"),
-                fieldWithPath("imageUrl").description("이미지 경로"),
-                fieldWithPath("description").description("장소 설명")
+                fieldWithPath("description").description("장소 설명"),
+                fieldWithPath("tags[].id").description("태그 ID"),
+                fieldWithPath("tags[].name").description("태그명")
         };
 
         // when
@@ -120,12 +135,14 @@ class PlaceDocumentation extends Documentation {
         FieldDescriptor[] responseFieldDescriptors = {
                 fieldWithPath("[].id").description("장소 ID"),
                 fieldWithPath("[].name").description("장소명"),
-                fieldWithPath("[].point.x").description("위도"),
-                fieldWithPath("[].point.y").description("경도"),
+                fieldWithPath("[].imageUrl").description("이미지 경로"),
+                fieldWithPath("[].latitude").description("위도"),
+                fieldWithPath("[].longitude").description("경도"),
                 fieldWithPath("[].recommendCount").description("추천수"),
                 fieldWithPath("[].readCount").description("조회수"),
-                fieldWithPath("[].imageUrl").description("이미지 경로"),
-                fieldWithPath("[].description").description("장소 설명")
+                fieldWithPath("[].description").description("장소 설명"),
+                fieldWithPath("[].tags[].id").description("태그 ID"),
+                fieldWithPath("[].tags[].name").description("태그명")
         };
 
         // when
@@ -137,32 +154,21 @@ class PlaceDocumentation extends Documentation {
     void updatePlace() {
         // given
         ReflectionTestUtils.setField(초막골_생태공원_응답, "id", 1L);
-        when(placeService.updatePlace(anyLong(), any())).thenReturn(초막골_생태공원_응답);
 
         ParameterDescriptor[] pathParameterDescriptors = {
                 parameterWithName("id").description("장소 ID")
         };
         FieldDescriptor[] requestFieldDescriptors = {
                 fieldWithPath("name").description("장소명"),
-                fieldWithPath("point.x").description("위도"),
-                fieldWithPath("point.y").description("경도"),
                 fieldWithPath("imageUrl").description("이미지 경로"),
-                fieldWithPath("description").description("장소 설명")
-        };
-        FieldDescriptor[] responseFieldDescriptors = {
-                fieldWithPath("id").description("장소 ID"),
-                fieldWithPath("name").description("장소명"),
-                fieldWithPath("point.x").description("위도"),
-                fieldWithPath("point.y").description("경도"),
-                fieldWithPath("recommendCount").description("추천수"),
-                fieldWithPath("readCount").description("조회수"),
-                fieldWithPath("imageUrl").description("이미지 경로"),
+                fieldWithPath("latitude").description("위도"),
+                fieldWithPath("longitude").description("경도"),
                 fieldWithPath("description").description("장소 설명")
         };
 
         // when
         장소_수정_요청(
-                given("place/update", pathParameters(pathParameterDescriptors), requestFields(requestFieldDescriptors), responseFields(responseFieldDescriptors)),
+                given("place/update", pathParameters(pathParameterDescriptors), requestFields(requestFieldDescriptors)),
                 수리산_산림욕장_응답,
                 초막골_생태공원
         );

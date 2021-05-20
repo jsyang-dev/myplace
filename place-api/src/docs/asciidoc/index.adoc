@@ -7,3 +7,5 @@
 :sectlinks:
 
 include::place.adoc[]
+
+include::tag.adoc[]

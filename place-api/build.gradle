@@ -10,10 +10,13 @@ dependencies {
     // db
     runtimeOnly 'mysql:mysql-connector-java'
 
+    // p6spy
+    implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.6.1'
+
     // rest docs
     asciidoctor 'org.springframework.restdocs:spring-restdocs-asciidoctor:2.0.5.RELEASE'
     testImplementation 'org.springframework.restdocs:spring-restdocs-restassured:2.0.5.RELEASE'
-
+    
     // test
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'io.rest-assured:rest-assured:3.3.0'

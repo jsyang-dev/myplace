@@ -1,0 +1,43 @@
+[[tag]]
+== 태그(tag)
+
+=== 태그 추가
+
+==== HTTP Request
+
+include::{snippets}/tag/add/http-request.adoc[]
+
+==== HTTP Response
+
+include::{snippets}/tag/add/http-response.adoc[]
+
+==== CURL Request
+
+include::{snippets}/tag/add/curl-request.adoc[]
+
+==== Request Fields
+
+include::{snippets}/tag/add/request-fields.adoc[]
+
+
+=== 태그 제거
+
+==== HTTP Request
+
+include::{snippets}/tag/remove/http-request.adoc[]
+
+==== HTTP Response
+
+include::{snippets}/tag/remove/http-response.adoc[]
+
+==== CURL Request
+
+include::{snippets}/tag/remove/curl-request.adoc[]
+
+==== Path Parameter
+
+include::{snippets}/tag/remove/path-parameters.adoc[]
+
+==== Request Parameter
+
+include::{snippets}/tag/remove/request-parameters.adoc[]

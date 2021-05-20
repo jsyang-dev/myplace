@@ -3,6 +3,7 @@ package info.myplace.placeapi.place.ui;
 import info.myplace.placeapi.place.application.PlaceService;
 import info.myplace.placeapi.place.dto.PlaceRequest;
 import info.myplace.placeapi.place.dto.PlaceResponse;
+import info.myplace.placeapi.place.dto.TagRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -10,7 +11,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.net.URI;
@@ -24,7 +27,7 @@ public class PlaceController {
     private final PlaceService placeService;
 
     @PostMapping
-    public ResponseEntity<PlaceResponse> createPlace(PlaceRequest placeRequest) {
+    public ResponseEntity<PlaceResponse> createPlace(@RequestBody PlaceRequest placeRequest) {
         PlaceResponse placeResponse = placeService.createPlace(placeRequest);
         return ResponseEntity.created(URI.create("/places/" + placeResponse.getId())).body(placeResponse);
     }
@@ -42,14 +45,26 @@ public class PlaceController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<PlaceResponse> updatePlaces(@PathVariable Long id, PlaceRequest placeRequest) {
-        PlaceResponse placeResponse = placeService.updatePlace(id, placeRequest);
-        return ResponseEntity.ok(placeResponse);
+    public ResponseEntity<Void> updatePlaces(@PathVariable Long id, @RequestBody PlaceRequest placeRequest) {
+        placeService.updatePlace(id, placeRequest);
+        return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletePlaces(@PathVariable Long id) {
         placeService.deletePlace(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("/{placeId}/tags")
+    public ResponseEntity<Void> addTag(@PathVariable Long placeId, @RequestBody TagRequest tagRequest) {
+        placeService.addTag(placeId, tagRequest);
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping("/{placeId}/tags")
+    public ResponseEntity<Void> removeTag(@PathVariable Long placeId, @RequestParam String tagName) {
+        placeService.removeTag(placeId, tagName);
+        return ResponseEntity.ok().build();
     }
 }

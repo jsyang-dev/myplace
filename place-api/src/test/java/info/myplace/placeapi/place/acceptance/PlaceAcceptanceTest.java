@@ -6,22 +6,21 @@ import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.http.HttpStatus;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static info.myplace.placeapi.place.PlaceSteps.수리산_산림욕장;
 import static info.myplace.placeapi.place.PlaceSteps.장소_리스트_조회_요청;
-import static info.myplace.placeapi.place.PlaceSteps.장소_리스트_조회됨;
-import static info.myplace.placeapi.place.PlaceSteps.장소_리스트_포함됨;
 import static info.myplace.placeapi.place.PlaceSteps.장소_삭제_요청;
-import static info.myplace.placeapi.place.PlaceSteps.장소_삭제됨;
 import static info.myplace.placeapi.place.PlaceSteps.장소_생성_요청;
-import static info.myplace.placeapi.place.PlaceSteps.장소_생성됨;
 import static info.myplace.placeapi.place.PlaceSteps.장소_수정_요청;
-import static info.myplace.placeapi.place.PlaceSteps.장소_수정됨;
 import static info.myplace.placeapi.place.PlaceSteps.장소_조회_요청;
-import static info.myplace.placeapi.place.PlaceSteps.장소_조회됨;
 import static info.myplace.placeapi.place.PlaceSteps.초막골_생태공원;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("장소 관리 인수 테스트")
 class PlaceAcceptanceTest extends AcceptanceTest {
@@ -88,5 +87,39 @@ class PlaceAcceptanceTest extends AcceptanceTest {
 
         // then
         장소_삭제됨(response);
+    }
+
+    public void 장소_생성됨(ExtractableResponse<Response> response) {
+        assertThat(response.statusCode()).isEqualTo(HttpStatus.CREATED.value());
+        assertThat(response.header("Location")).isNotBlank();
+    }
+
+    public void 장소_조회됨(ExtractableResponse<Response> response) {
+        assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value());
+        assertThat(response.as(PlaceResponse.class)).isNotNull();
+    }
+
+    public void 장소_리스트_조회됨(ExtractableResponse<Response> response) {
+        assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value());
+    }
+
+    public void 장소_리스트_포함됨(ExtractableResponse<Response> response, List<PlaceResponse> placeResponses) {
+        List<Long> placeIds = new ArrayList<>(response.jsonPath().getList(".", PlaceResponse.class))
+                .stream()
+                .map(PlaceResponse::getId)
+                .collect(Collectors.toList());
+        List<Long> expectedPlaceIds = placeResponses.stream()
+                .map(PlaceResponse::getId)
+                .collect(Collectors.toList());
+
+        assertThat(placeIds).containsAll(expectedPlaceIds);
+    }
+
+    public void 장소_수정됨(ExtractableResponse<Response> response) {
+        assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value());
+    }
+
+    public void 장소_삭제됨(ExtractableResponse<Response> response) {
+        assertThat(response.statusCode()).isEqualTo(HttpStatus.NO_CONTENT.value());
     }
 }

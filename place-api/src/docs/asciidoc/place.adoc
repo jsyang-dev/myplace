@@ -88,10 +88,6 @@ include::{snippets}/place/update/path-parameters.adoc[]
 
 include::{snippets}/place/update/request-fields.adoc[]
 
-==== Response Fields
-
-include::{snippets}/place/update/response-fields.adoc[]
-
 
 === 장소 삭제
 
