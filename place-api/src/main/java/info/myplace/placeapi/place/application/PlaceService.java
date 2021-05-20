@@ -27,7 +27,7 @@ public class PlaceService {
 
     @Transactional(readOnly = true)
     public PlaceResponse getPlace(Long id) {
-        Place place = placeRepository.findById(id).orElseThrow(() -> new PlaceNotFoundException(id));
+        Place place = findPlaceById(id);
         return PlaceResponse.of(place);
     }
 
@@ -40,7 +40,7 @@ public class PlaceService {
     }
 
     public void updatePlace(Long id, PlaceRequest placeRequest) {
-        Place place = placeRepository.findById(id).orElseThrow(() -> new PlaceNotFoundException(id));
+        Place place = findPlaceById(id);
         place.update(placeRequest.toPlace());
     }
 
@@ -49,7 +49,16 @@ public class PlaceService {
     }
 
     public void addTag(Long placeId, TagRequest tagRequest) {
-        Place place = placeRepository.findById(placeId).orElseThrow(() -> new PlaceNotFoundException(placeId));
+        Place place = findPlaceById(placeId);
         place.addTag(tagRequest.toTag());
+    }
+
+    public void removeTag(Long placeId, String tagName) {
+        Place place = findPlaceById(placeId);
+        place.removeTag(tagName);
+    }
+
+    private Place findPlaceById(Long id) {
+        return placeRepository.findById(id).orElseThrow(() -> new PlaceNotFoundException(id));
     }
 }

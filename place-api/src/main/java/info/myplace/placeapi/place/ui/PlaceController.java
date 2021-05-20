@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.net.URI;
@@ -56,8 +57,14 @@ public class PlaceController {
     }
 
     @PostMapping("/{placeId}/tags")
-    public ResponseEntity<Void> createPlace(@PathVariable Long placeId, @RequestBody TagRequest tagRequest) {
+    public ResponseEntity<Void> addTag(@PathVariable Long placeId, @RequestBody TagRequest tagRequest) {
         placeService.addTag(placeId, tagRequest);
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping("/{placeId}/tags")
+    public ResponseEntity<Void> removeTag(@PathVariable Long placeId, @RequestParam String tagName) {
+        placeService.removeTag(placeId, tagName);
         return ResponseEntity.ok().build();
     }
 }
